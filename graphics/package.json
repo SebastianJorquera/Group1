@@ -1,0 +1,16 @@
+{
+  "name": "graphics",
+  "version": "1.0.0",
+  "description": "A graphics library for space invaders",
+  "main": "test_server.js",
+  "scripts": {
+    "test": "node test_server.js",
+    "install": "./download_libs.sh; ./download_images.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
