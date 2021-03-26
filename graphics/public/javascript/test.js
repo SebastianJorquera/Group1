@@ -61,7 +61,7 @@ function resize_sprite_width(sprite, width) {
 	sprite.height /= divisor;
 }
 
-function resize_wprite_height(sprite, height) {
+function resize_sprite_height(sprite, height) {
 	// keeps aspect ratio
 	let divisor = sprite.height / height;
 	sprite.width /= divisor;
