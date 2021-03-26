@@ -50,9 +50,11 @@ function gameLoop() {
 }
 
 function setup() {
-	graphicsCore.addEntity({
-		type: 'TestEntity'
-	});
+	let entityData = {
+		type: 'TestEntity',
+		isAlive: true,
+	};
+	graphicsCore.addEntity(entityData);
 	requestAnimationFrame(gameLoop);
 }
 

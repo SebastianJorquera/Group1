@@ -6,7 +6,12 @@ class Entity {
 
 	constructor(entityData, core) {
 		this.core = core;
-		Object.assign(this.props, entityData);
+		for (let attribute in this.props) {
+			if (!(attribute in entityData)) {
+				entityData[attribute] = this.props[attribute];
+			}
+		}
+		this.props = entityData;
 		this.setup();
 	}
 
