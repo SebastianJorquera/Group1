@@ -7,7 +7,7 @@ class Entity {
 	constructor(entityData, core) {
 		this.core = core;
 		Object.assign(this.props, entityData);
-		setup()
+		this.setup();
 	}
 
 	isAlive() {
@@ -24,5 +24,16 @@ class Entity {
 	}
 
 	cleanup() { // remove sprite from stage, etc.
+	}
+}
+
+class Particle extends Entity {
+	props = {
+		type : 'Particle',
+		isAlive : true,
+	}
+
+	constructor(core) {
+		super({}, core);
 	}
 }

@@ -13,7 +13,7 @@ class GraphicsCore {
 		this.loader = PIXI.Loader.shared;
 		console.log(`WebGl supported: ${PIXI.utils.isWebGLSupported()}`);
 		document.body.appendChild(this.app.view);
-		initializeLoader(loader, callback);
+		this.initializeLoader(this.loader, callback);
 	}
 
 	initializeLoader(loader, callback) {
@@ -22,10 +22,10 @@ class GraphicsCore {
 	}
 
 	addEntity(entityData) {
-		if (entityData.type in entityClassMap) {
-			let entityClass = entityClassMap[entityData.type]
+		if (entityData.type in this.entityClassMap) {
+			let entityClass = this.entityClassMap[entityData.type]
 			let entity = new entityClass(entityData, this);
-			entities.push(entity);
+			this.entities.push(entity);
 		}
 		else {
 			console.error(`Error: entity of type ${entityData.type} does not exist`);
@@ -34,8 +34,8 @@ class GraphicsCore {
 
 	graphicsLoop() {
 		let aliveEntities = [];
-		for (let entity of entities) {
-			if (entity.isAlive) {
+		for (let entity of this.entities) {
+			if (entity.isAlive()) {
 				entity.draw();
 				aliveEntities.push(entity);
 			} else {
@@ -43,7 +43,7 @@ class GraphicsCore {
 				entity.cleanup();
 			}
 		}
-		entities = aliveEntities;
+		this.entities = aliveEntities;
 	}
 
 	clearParticles() {
