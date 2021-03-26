@@ -24,7 +24,7 @@ class GraphicsCore {
 	addEntity(entityData) {
 		if (entityData.type in entityClassMap) {
 			let entityClass = entityClassMap[entityData.type]
-			let entity = new entityClass(entityData, this.app, this.loader);
+			let entity = new entityClass(entityData, this);
 			entities.push(entity);
 		}
 		else {

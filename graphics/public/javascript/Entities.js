@@ -4,9 +4,8 @@ class Entity {
 		isAlive : true,
 	}
 
-	constructor(entityData, app, loader) {
-		this.app = app;
-		this.loader = loader;
+	constructor(entityData, core) {
+		this.core = core;
 		Object.assign(this.props, entityData);
 		setup()
 	}
