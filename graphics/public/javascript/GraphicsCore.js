@@ -32,6 +32,17 @@ class GraphicsCore {
 	}
 
 	graphicsLoop() {
+		let aliveEntities = [];
+		for (let entity of entities) {
+			if (entity.isAlive) {
+				entity.draw();
+				aliveEntities.push(entity);
+			} else {
+				entity.death();
+				entity.cleanup();
+			}
+		}
+		entities = aliveEntities;
 	}
 
 	clearParticles() {
