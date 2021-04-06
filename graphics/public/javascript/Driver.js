@@ -30,11 +30,14 @@ class TestEntity extends Entity {
 	}
 
 	draw() {
+		// gameloop code, don't put this type of code in draw
+		// I'm just doing this for a quick demo
 		if (this.props.x > 60) {
 			this.props.isAlive = false;
 		}
 		this.props.x += 1;
 		this.props.y += 1;
+		// end of gameloop code
 		this.sprite.x = this.props.x;
 		this.sprite.y = this.props.y;
 	}
