@@ -33,12 +33,21 @@ class Entity {
 }
 
 class Particle extends Entity {
-	props = {
-		type : 'Particle',
-		isAlive : true,
-	}
+	isAlive = true;
 
 	constructor(core) {
 		super({}, core);
+	}
+
+	draw() {
+		this.update();
+		super.draw()
+	}
+
+	update() { // game logic goes here
+	}
+
+	isAlive() {
+		return this.isAlive;
 	}
 }
