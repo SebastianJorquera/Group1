@@ -13,12 +13,12 @@ class GraphicsCore {
 		this.loader = PIXI.Loader.shared;
 		console.log(`WebGl supported: ${PIXI.utils.isWebGLSupported()}`);
 		document.body.appendChild(this.app.view);
-		this.initializeLoader(this.loader, callback);
+		this.initializeLoader(this.loader);
+		this.loader.load(callback);
 	}
 
-	initializeLoader(loader, callback) {
+	initializeLoader(loader) {
 		// fetch all the sprites
-		loader.load(callback);
 	}
 
 	addEntity(entityData) {

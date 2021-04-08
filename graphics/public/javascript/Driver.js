@@ -1,8 +1,8 @@
 class TestGraphicsCore extends GraphicsCore {
-	initializeLoader(loader, callback) {
+	initializeLoader(loader) {
 		// fetch all the sprites
+		super.initializeLoader(loader);
 		loader.add('sprite', '/public/images/sprite.jpg');
-		loader.load(callback);
 	}
 	entityClassMap = {
 		'TestEntity': TestEntity,
@@ -32,7 +32,7 @@ class TestEntity extends Entity {
 	draw() {
 		// gameloop code, don't put this type of code in draw
 		// I'm just doing this for a quick demo
-		if (this.props.x > 60) {
+		if (this.props.x > 120) {
 			this.props.isAlive = false;
 		}
 		this.props.x += 1;
