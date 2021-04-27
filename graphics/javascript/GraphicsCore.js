@@ -17,6 +17,7 @@ class GraphicsCore {
 			resizeTo : viewContainer,
 			antialias : true,
 		});
+		this.app.stage.sortableChildren = true;
 		this.loader = PIXI.Loader.shared;
 		console.log(`WebGl supported: ${PIXI.utils.isWebGLSupported()}`);
 		document.body.appendChild(this.app.view);
@@ -46,7 +47,6 @@ class GraphicsCore {
 	graphicsLoop() {
 		let aliveEntities = [];
 		for (let entity of this.entities) {
-			console.log(entity);
 			if (entity.isAlive()) {
 				entity.loop();
 				aliveEntities.push(entity);

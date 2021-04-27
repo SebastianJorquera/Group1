@@ -34,6 +34,8 @@ class CommonEntity extends Entity {
 		);
 		this.sprite = sprite;
 		sprite.scale.set(this.props.scale, this.props.scale);
+		sprite.anchor.x = 0.5;
+		sprite.anchor.y = 0.5;
 		sprite.x = this.props.x;
 		sprite.y = this.props.y;
 		this.core.app.stage.addChild(sprite);

@@ -14,9 +14,6 @@ class TestEntity extends Player {
 		super.draw();
 		// gameloop code, don't put this type of code in draw
 		// I'm just doing this for a quick demo
-		if (this.props.x > 120) {
-			this.props.isAlive = false;
-		}
 		this.props.x += 1;
 		this.props.y += 1;
 	}

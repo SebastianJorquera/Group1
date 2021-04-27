@@ -32,6 +32,7 @@ class MovingCircle extends Particle {
 		circle.beginFill(this.color);
 		circle.drawCircle(0, 0, this.radius);
 		circle.endFill();
+		circle.zIndex = -1;
 
 		this.syncCirclePosition();
 		this.core.app.stage.addChild(circle);
