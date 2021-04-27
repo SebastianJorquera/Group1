@@ -1,4 +1,16 @@
 class CommonEntity extends Entity {
+	/* A lot of entities has xy coordinates and should be able to be
+	 * scaled in size. This class implements these features so that they
+	 * don't have to be reimplemented in those entities.
+	 *
+	 * This class is also a nice example of how to extend the Entity
+	 * class.
+	 *
+	 * WARNING: When you extend this class or Entity, do NOT add new
+	 * arguments to the constructor. If you do then that entity will case
+	 * issues if they were ever initialized. This class can do that
+	 * with 'spriteTexture' since it is just meant to be extended. */
+
 	static defaults = {
 		x: 0,
 		y: 0,
