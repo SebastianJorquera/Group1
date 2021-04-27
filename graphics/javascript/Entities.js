@@ -1,18 +1,25 @@
 class Entity {
-	props = { // default attributes go here
+	static defaults = { // default attributes go here
 		type : 'Entity',
 		isAlive : true,
 	}
 
 	constructor(entityData, core) {
 		this.core = core;
-		for (let attribute in this.props) {
-			if (!(attribute in entityData)) {
-				entityData[attribute] = this.props[attribute];
-			}
-		}
 		this.props = entityData;
 		this.setup();
+	}
+
+	static applyDefaultProps(defaults, props) {
+		for (let attribute in defaults) {
+			if (!(attribute in props)) {
+				props[attribute] = default[attribute];
+			}
+		}
+	}
+
+	setDefaultProps(props) {
+		Entity.applyDefaultProps(Entity.defaults, props);
 	}
 
 	isAlive() {
