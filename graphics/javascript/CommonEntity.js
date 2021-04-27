@@ -12,13 +12,13 @@ class CommonEntity extends Entity {
 
 	setDefaultProps(props) {
 		super.setDefaultProps(props);
-		applyDefaultProps(CommonEntity.defaults, props);
+		Entity.applyDefaultProps(CommonEntity.defaults, props);
 	}
 
 	setup() {
 		super.setup();
 		let sprite = new PIXI.Sprite(
-			this.core.loader.resources[spriteTexture].texture
+			this.core.loader.resources[this.spriteTexture].texture
 		);
 		this.sprite = sprite;
 		sprite.scale.set(this.props.scale, this.props.scale);

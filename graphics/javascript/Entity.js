@@ -7,13 +7,13 @@ class Entity {
 	constructor(entityData, core) {
 		this.core = core;
 		this.props = entityData;
-		this.setup();
+		this.setDefaultProps(entityData);
 	}
 
 	static applyDefaultProps(defaults, props) {
 		for (let attribute in defaults) {
 			if (!(attribute in props)) {
-				props[attribute] = default[attribute];
+				props[attribute] = defaults[attribute];
 			}
 		}
 	}

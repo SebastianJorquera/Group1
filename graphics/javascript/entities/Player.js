@@ -1,2 +1,5 @@
-class Player extends Entities {
+class Player extends CommonEntity {
+	constructor(entityData, core) {
+		super(entityData, core, 'spaceship');
+	}
 }

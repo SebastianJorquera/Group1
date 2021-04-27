@@ -1,5 +1,6 @@
 class GraphicsCore {
 	entityClassMap = {
+		'Player' : Player,
 	}
 
 	entities = []
@@ -19,12 +20,16 @@ class GraphicsCore {
 
 	initializeLoader(loader) {
 		// fetch all the sprites
+		loader
+			.add('bullet', '/public/images_original/bullet.png')
+			.add('spaceship', '/public/images_original/spaceship.png');
 	}
 
 	addEntity(entityData) {
 		if (entityData.type in this.entityClassMap) {
 			let entityClass = this.entityClassMap[entityData.type]
 			let entity = new entityClass(entityData, this);
+			entity.setup();
 			this.entities.push(entity);
 		}
 		else {
