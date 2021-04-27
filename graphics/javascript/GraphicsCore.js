@@ -1,4 +1,9 @@
 class GraphicsCore {
+
+	/* The entityClassMap is to tell the GraphicsCore which class of entities
+	 * to create when backend passes an entityData object with any particular
+	 * type. For example, in the entityData object, if type : 'Player' then
+	 * the class Player will be created for the entityData object. */
 	entityClassMap = {
 		'Player' : Player,
 		'Bullet' : Bullet,
