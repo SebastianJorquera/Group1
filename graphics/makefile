@@ -12,7 +12,11 @@ public/build/GraphicsTest.js: public/build/Graphics.js javascript/Driver.js
 	mkdir -p $(@D)
 	cat $^ > $@
 
-public/build/Graphics.js: public/lib/pixi.js javascript/GraphicsCore.js build/AllEntities.js
+libraries = \
+			public/lib/pixi.js \
+			public/lib/victor/build/victor.js
+
+public/build/Graphics.js: $(libraries) javascript/GraphicsCore.js build/AllEntities.js
 	mkdir -p $(@D)
 	cat $^ > $@
 

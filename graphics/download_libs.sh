@@ -10,4 +10,6 @@ echo "dir: $(pwd)"
 wget 'https://pixijs.download/v6.0.0/pixi.js' -O pixi.js
 wget 'https://pixijs.download/v6.0.0/pixi.js.map' -O pixi.js.map
 
+git clone 'https://github.com/maxkueng/victor.git' victor
+
 trap - EXIT
