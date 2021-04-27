@@ -16,9 +16,12 @@ public/build/Graphics.js: public/lib/pixi.js javascript/GraphicsCore.js build/Al
 	mkdir -p $(@D)
 	cat $^ > $@
 
-entity_files = 
+entity_dir = javascript/entities/
+entity_files = Player.js
 
-build/AllEntities.js: javascript/Entities.js $(entity_files)
+entity_file_paths = $(addprefix $(entity_dir), $(entity_files))
+
+build/AllEntities.js: javascript/Entities.js $(entity_file_paths)
 	mkdir -p $(@D)
 	cat $^ > $@
 
