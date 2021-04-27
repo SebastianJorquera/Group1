@@ -72,12 +72,7 @@ class Particle extends Entity {
 		super({}, core);
 	}
 
-	draw() {
-		super.draw()
-	}
-
 	update() { // game logic goes here
-		super.update();
 	}
 
 	loop() {
