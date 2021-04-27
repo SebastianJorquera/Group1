@@ -1,6 +1,7 @@
 class GraphicsCore {
 	entityClassMap = {
 		'Player' : Player,
+		'Bullet' : Bullet,
 	}
 
 	entities = []
