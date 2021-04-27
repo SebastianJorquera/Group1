@@ -46,6 +46,7 @@ class GraphicsCore {
 	graphicsLoop() {
 		let aliveEntities = [];
 		for (let entity of this.entities) {
+			console.log(entity);
 			if (entity.isAlive()) {
 				entity.loop();
 				aliveEntities.push(entity);

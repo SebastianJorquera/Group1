@@ -22,6 +22,12 @@ class Entity {
 		}
 	}
 
+	/* Use this to add a particle */
+	addParticle(particle) {
+		particle.setup();
+		this.core.entities.push(particle);
+	}
+
 	/* When you want to introduce new default props for your class that
 	 * extends Entity, then make you can add the defaults to the props
 	 * object here. Make sure to call super.setDefaultProps */
@@ -66,11 +72,7 @@ class Entity {
 }
 
 class Particle extends Entity {
-	/* There is not need to add a particle to the graphics core like other
-	 * entities. The setup() function of Particle should take care of
-	 * everything. */
-
-	isAlive = true;
+	alive = true;
 
 	constructor(core) {
 		super({}, core);
@@ -85,6 +87,6 @@ class Particle extends Entity {
 	}
 
 	isAlive() {
-		return this.isAlive;
+		return this.alive;
 	}
 }
