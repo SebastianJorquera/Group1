@@ -47,7 +47,7 @@ class GraphicsCore {
 		let aliveEntities = [];
 		for (let entity of this.entities) {
 			if (entity.isAlive()) {
-				entity.draw();
+				entity.loop();
 				aliveEntities.push(entity);
 			} else {
 				entity.death();

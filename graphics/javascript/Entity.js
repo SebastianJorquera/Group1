@@ -57,6 +57,12 @@ class Entity {
 	 * the sprite. */
 	cleanup() {
 	}
+
+	/* The function that the graphics loop calls to call functions that
+		* run each loop. */
+	loop() {
+		this.draw();
+	}
 }
 
 class Particle extends Entity {
@@ -67,11 +73,16 @@ class Particle extends Entity {
 	}
 
 	draw() {
-		this.update();
 		super.draw()
 	}
 
 	update() { // game logic goes here
+		super.update();
+	}
+
+	loop() {
+		this.update();
+		super.loop();
 	}
 
 	isAlive() {
