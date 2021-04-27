@@ -66,6 +66,10 @@ class Entity {
 }
 
 class Particle extends Entity {
+	/* There is not need to add a particle to the graphics core like other
+	 * entities. The setup() function of Particle should take care of
+	 * everything. */
+
 	isAlive = true;
 
 	constructor(core) {
