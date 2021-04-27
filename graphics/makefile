@@ -18,7 +18,7 @@ public/build/Graphics.js: public/lib/pixi.js javascript/GraphicsCore.js build/Al
 
 entity_files = javascript/entities/*
 
-build/AllEntities.js: javascript/Entities.js $(entity_files)
+build/AllEntities.js: javascript/Entity.js javascript/CommonEntity.js $(entity_files)
 	mkdir -p $(@D)
 	cat $^ > $@
 
