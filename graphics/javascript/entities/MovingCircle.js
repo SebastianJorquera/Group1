@@ -20,9 +20,9 @@ class MovingCircle extends Particle {
 	}
 
 	updateLifecycle() {
-		if (this.lifecycle > 0) {
-			this.lifecycle--;
-		} else if (this.lifecycle == 0) {
+		if (this.lifecycle < 0) { return; }
+		this.lifecycle--;
+		if (this.lifecycle < 0) {
 			this.alive = false;
 		}
 	}

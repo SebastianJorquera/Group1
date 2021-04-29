@@ -1,6 +1,13 @@
 class Bullet extends CommonEntity {
 	particleRate = 1;
 	particleSpeed = 2;
+	deathColors = [
+		0xffba08,
+		0x72efdd,
+		0xdeaaff,
+	];
+	deathParticles = 50;
+	deathParticleSpeed = 3;
 
 	frames = 0;
 	previousPosition = new Victor(0, 0);
@@ -13,6 +20,26 @@ class Bullet extends CommonEntity {
 		super.draw();
 		this.changeOrientation();
 		this.particles();
+	}
+
+	death() {
+		super.death();
+		let deathColors = this.deathColors;
+		let deathColor = deathColors[Math.floor(Math.random() * deathColors.length)];
+		for (let i = 0; i < this.deathParticles; i++) {
+			let circleProps = {
+				color : deathColor,
+				lifecycle : 10 * Math.random() * 2,
+				radius : 2 * this.props.scale * Math.random() * 2,
+			};
+			let speed = this.deathParticleSpeed * 2 * Math.random();
+			let circle = new MovingCircle( this.core,
+				Victor.fromObject(this.props),
+				new Victor(speed, 0).rotateDeg(Math.random() * 360),
+				circleProps
+			);
+			this.addParticle(circle);
+		}
 	}
 
 	changeOrientation() {
