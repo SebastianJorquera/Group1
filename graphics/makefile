@@ -16,7 +16,8 @@ libraries = \
 			public/lib/pixi.js \
 			public/lib/victor/build/victor.js
 
-public/build/Graphics.js: $(libraries) javascript/GraphicsCore.js build/AllEntities.js
+public/build/Graphics.js: $(libraries) javascript/GraphicsCore.js javascript/Utils.js \
+	build/AllEntities.js
 	mkdir -p $(@D)
 	cat $^ > $@
 
