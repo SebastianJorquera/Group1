@@ -1,9 +1,16 @@
 class MovingCircle extends Particle {
 
 	/* position and velocity are of instance Victor
-	 * circleProps = { color: int, radius: int, lifecycle: int }
+	 * circleProps = {
+	 *     color: int,
+	 *     radius: int,
+	 *     lifecycle: int,
+	 *     alpha: int,
+	 *     container: PIXI.container,
+	 * }
 	 * lifecycle is the number of updates before the circle dies.
-	 * If lifecycle is negative then it will never automatically die. */
+	 * If lifecycle is negative then it will never automatically die.
+	 * If container is undefined then the PIXI stage will be used. */
 	constructor(core, position, velocity, circleProps) {
 		super(core);
 		this.position = position;
@@ -12,6 +19,7 @@ class MovingCircle extends Particle {
 		this.radius = circleProps.radius ? circleProps.radius : 5;
 		this.lifecycle = circleProps.lifecycle ? circleProps.lifecycle : -1;
 		this.alpha = circleProps.alpha ? circleProps.alpha : 1;
+		this.container = circleProps.container ? circleProps.container : this.core.app.stage;
 	}
 
 	syncCirclePosition() {
@@ -30,13 +38,17 @@ class MovingCircle extends Particle {
 	setup() {
 		let circle = new PIXI.Graphics();
 		this.circle = circle;
-		circle.beginFill(this.color, this.alpha);
-		circle.drawCircle(0, 0, this.radius);
-		circle.endFill();
-		circle.zIndex = -1;
-
+		this.drawCircle();
 		this.syncCirclePosition();
-		this.core.app.stage.addChild(circle);
+		this.container.addChild(circle);
+	}
+
+	drawCircle() {
+		this.circle.clear();
+		this.circle.beginFill(this.color, this.alpha);
+		this.circle.drawCircle(0, 0, this.radius);
+		this.circle.endFill();
+		this.circle.zIndex = -1;
 	}
 
 	draw() {
@@ -50,6 +62,44 @@ class MovingCircle extends Particle {
 
 	cleanup() {
 		super.cleanup();
-		this.core.app.stage.removeChild(this.circle);
+		this.container.removeChild(this.circle);
+	}
+}
+
+/* circleProps = {
+ *     targetAlpha : float, // [0,1]
+ *     targetColor : int
+ * }
+ * As well as all the circleProps from MovingCircle.
+ *
+ * targetAlpha and targetColor are the values to fade into.
+ * Fade time is based on lifecycle */
+class FadingCircle extends MovingCircle {
+	constructor(core, position, velocity, circleProps) {
+		super(core, position, velocity, circleProps);
+		this.targetAlpha = circleProps.targetAlpha ? circleProps.targetAlpha : 0;
+		this.targetColor = circleProps.targetColor ? circleProps.targetColor : this.color;
+		this.originalAlpha = this.alpha;
+		this.originalColor = this.color;
+		this.lifespan = this.lifecycle;
+	}
+
+	draw() {
+		super.draw();
+		this.drawCircle();
+	}
+
+	update() {
+		super.update();
+		let diff = this.lifespan - this.lifecycle;
+		let fadeRatio = diff / this.lifespan;
+		let oColorRGB = Utils.hexToRgb(this.originalColor);
+		let tColorRGB = Utils.hexToRgb(this.targetColor);
+		let newColorRGB = [];
+		for (let i = 0; i < oColorRGB.length; i++) {
+			newColorRGB.push(Utils.lerp(oColorRGB[i], tColorRGB[i], fadeRatio));
+		}
+		this.color = Utils.rgbToHex(newColorRGB);
+		this.alpha = Utils.lerp(this.originalAlpha, this.targetAlpha, fadeRatio);
 	}
 }

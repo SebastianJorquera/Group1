@@ -61,6 +61,18 @@ class TestEntity extends Bullet {
 		if (keyboard.isKeyDown('k')) {
 			this.props.isAlive = false;
 		}
+		if (keyboard.isKeyDown('f')) {
+			this.props.isAlive = false;
+			let flame = new Flame(this.core,
+				new Victor(this.props.x, this.props.y),
+				-90,
+				{
+					maxSpeed : 4,
+					degRange : 180,
+				}
+			);
+			this.addParticle(flame); 
+		}
 	}
 }
 
@@ -72,16 +84,6 @@ function gameLoop() {
 function setup() {
 	graphicsCore.addEntity({
 		type: 'TestEntity',
-	});
-	graphicsCore.addEntity({
-		type: 'TestEntity',
-		x: 100,
-		y: 100,
-	});
-	graphicsCore.addEntity({
-		type: 'TestEntity',
-		x: 200,
-		y: 200,
 	});
 	requestAnimationFrame(gameLoop);
 }
