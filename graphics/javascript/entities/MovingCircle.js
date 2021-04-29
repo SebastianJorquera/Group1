@@ -84,6 +84,10 @@ class FadingCircle extends MovingCircle {
 		this.lifespan = this.lifecycle;
 	}
 
+	setup() {
+		super.setup();
+	}
+
 	draw() {
 		super.draw();
 		this.drawCircle();
@@ -101,5 +105,41 @@ class FadingCircle extends MovingCircle {
 		}
 		this.color = Utils.rgbToHex(newColorRGB);
 		this.alpha = Utils.lerp(this.originalAlpha, this.targetAlpha, fadeRatio);
+	}
+}
+
+/* FadingCircle that works with PIXI.ParticleContainer.
+ * One difference is that it uses sprites instead of graphics.
+ *
+ * textureStore is just an object to cache the texture in so multiple FadingCircles
+ * can use the same textureStore */
+class FadingCircleP extends FadingCircle {
+	constructor(core, position, velocity, textureStore, circleProps) {
+		super(core, position, velocity, circleProps)
+		this.textureStore = textureStore;
+	}
+	setup() {
+		if (this.textureStore.circleTexture === undefined) {
+			let circle = new PIXI.Graphics();
+			this.circle = circle;
+			this.drawCircle();
+			this.textureStore.circleTexture = this.core.app.renderer.generateTexture(this.circle);
+		}
+		this.circle = new PIXI.Sprite(this.textureStore.circleTexture);
+		this.syncCirclePosition();
+		this.container.addChild(this.circle);
+	}
+
+	drawCircle() {
+		this.circle.beginFill(0xFFFFFF);
+		this.circle.drawCircle(0, 0, this.radius);
+		this.circle.endFill();
+		this.circle.zIndex = -1;
+	}
+
+	draw() {
+		this.syncCirclePosition();
+		this.circle.alpha = this.alpha;
+		this.circle.tint = this.color;
 	}
 }

@@ -67,7 +67,7 @@ class TestEntity extends Bullet {
 				new Victor(this.props.x, this.props.y),
 				-90,
 				{
-					maxSpeed : 4,
+					maxSpeed : 6,
 					degRange : 180,
 				}
 			);

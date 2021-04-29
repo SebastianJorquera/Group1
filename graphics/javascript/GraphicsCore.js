@@ -7,9 +7,9 @@ class GraphicsCore {
 	entityClassMap = {
 		'Player' : Player,
 		'Bullet' : Bullet,
-	}
+	};
 
-	entities = []
+	entities = [];
 
 	constructor(viewContainer, callback) {
 		// viewContainer is a DOM element that contains the PIXI app view
