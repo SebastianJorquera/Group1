@@ -11,6 +11,7 @@ class MovingCircle extends Particle {
 		this.color = circleProps.color ? circleProps.color : 0xFFFFFF;
 		this.radius = circleProps.radius ? circleProps.radius : 5;
 		this.lifecycle = circleProps.lifecycle ? circleProps.lifecycle : -1;
+		this.alpha = circleProps.alpha ? circleProps.alpha : 1;
 	}
 
 	syncCirclePosition() {
@@ -29,7 +30,7 @@ class MovingCircle extends Particle {
 	setup() {
 		let circle = new PIXI.Graphics();
 		this.circle = circle;
-		circle.beginFill(this.color);
+		circle.beginFill(this.color, this.alpha);
 		circle.drawCircle(0, 0, this.radius);
 		circle.endFill();
 		circle.zIndex = -1;
