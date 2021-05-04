@@ -79,6 +79,7 @@ class FadingCircle extends MovingCircle {
 		super(core, position, velocity, circleProps);
 		this.targetAlpha = circleProps.targetAlpha ? circleProps.targetAlpha : 0;
 		this.targetColor = circleProps.targetColor ? circleProps.targetColor : this.color;
+		this.fadeIn = circleProps.fadeIn ? circleProps.fadeIn : false;
 		this.originalAlpha = this.alpha;
 		this.originalColor = this.color;
 		this.lifespan = this.lifecycle;
@@ -93,10 +94,27 @@ class FadingCircle extends MovingCircle {
 		this.drawCircle();
 	}
 
+	calcFadeRatio() {
+		let fadeRatio;
+		if (this.fadeIn) {
+			if (this.lifecycle > this.lifespan / 2) {
+				let diff = this.lifespan - this.lifecycle;
+				fadeRatio = diff / (this.lifespan / 2);
+				fadeRatio = 1 - fadeRatio;
+			} else {
+				let diff = this.lifespan / 2 - this.lifecycle;
+				fadeRatio = diff / (this.lifespan / 2);
+			}
+		} else {
+			let diff = this.lifespan - this.lifecycle;
+			fadeRatio = diff / this.lifespan;
+		}
+		return fadeRatio;
+	}
+
 	update() {
 		super.update();
-		let diff = this.lifespan - this.lifecycle;
-		let fadeRatio = diff / this.lifespan;
+		let fadeRatio = this.calcFadeRatio();
 		let oColorRGB = Utils.hexToRgb(this.originalColor);
 		let tColorRGB = Utils.hexToRgb(this.targetColor);
 		let newColorRGB = [];
@@ -126,6 +144,7 @@ class FadingCircleP extends FadingCircle {
 			this.textureStore.circleTexture = this.core.app.renderer.generateTexture(this.circle);
 		}
 		this.circle = new PIXI.Sprite(this.textureStore.circleTexture);
+		this.circle.anchor.set(0.5, 0.5);
 		this.syncCirclePosition();
 		this.container.addChild(this.circle);
 	}
