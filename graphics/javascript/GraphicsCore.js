@@ -11,6 +11,11 @@ class GraphicsCore {
 		'Background' : Background,
 	};
 
+	sound = {
+		'blaster' : new Audio('/public/audio/blaster.mp3'),
+		'explosion' : new Audio('/public/audio/explode.mp3'),
+	};
+
 	entities = [];
 
 	constructor(viewContainer, callback) {
@@ -25,6 +30,14 @@ class GraphicsCore {
 		document.body.appendChild(this.app.view);
 		this.initializeLoader(this.loader);
 		this.loader.load(callback);
+	}
+
+	playSound(name) {
+		if (name in this.sound) {
+			this.sound[name].play();
+		} else {
+			console.log(`missing sound effect: ${name}`);
+		}
 	}
 
 	initializeLoader(loader) {

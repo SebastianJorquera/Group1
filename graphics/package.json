@@ -5,7 +5,7 @@
   "main": "test_server.js",
   "scripts": {
     "test": "node test_server.js",
-    "install": "./download_libs.sh; ./download_images.sh"
+    "install": "./download_libs.sh; ./download_images.sh; ./download_audio.sh"
   },
   "author": "",
   "license": "ISC",
