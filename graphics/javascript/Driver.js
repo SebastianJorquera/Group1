@@ -41,7 +41,7 @@ class TestGraphicsCore extends GraphicsCore {
 	}
 }
 
-class TestEntity extends Bullet {
+class TestEntity extends EnemyBullet {
 	draw() {
 		super.draw();
 		// gameloop code, don't put this type of code in draw
@@ -84,6 +84,9 @@ function gameLoop() {
 function setup() {
 	graphicsCore.addEntity({
 		type: 'TestEntity',
+	});
+	graphicsCore.addEntity({
+		type: 'Background',
 	});
 	requestAnimationFrame(gameLoop);
 }

@@ -1,6 +1,7 @@
 class Bullet extends CommonEntity {
 	particleRate = 1;
 	particleSpeed = 2;
+	particleColor = 0x73d2de;
 	deathColors = [
 		0xffba08,
 		0x72efdd,
@@ -62,7 +63,7 @@ class Bullet extends CommonEntity {
 		velocity.add(position.clone().subtract(this.previousPosition));
 		velocity.invert();
 		let circleProps = {
-			color : 0x73d2de,
+			color : this.particleColor,
 			lifecycle : 20,
 			radius : 2 * this.props.scale,
 		};
@@ -80,5 +81,14 @@ class Bullet extends CommonEntity {
 			vy *= -1;
 		}
 		return new Victor(vx, vy);
+	}
+}
+
+class EnemyBullet extends Bullet {
+	particleColor = 0xFFd2de;
+
+	setup() {
+		super.setup();
+		this.sprite.tint = 0xFF0000;
 	}
 }

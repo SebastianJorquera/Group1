@@ -7,6 +7,8 @@ class GraphicsCore {
 	entityClassMap = {
 		'Player' : Player,
 		'Bullet' : Bullet,
+		'EnemyBullet' : EnemyBullet,
+		'Background' : Background,
 	};
 
 	entities = [];
