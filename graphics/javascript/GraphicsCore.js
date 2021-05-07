@@ -43,8 +43,9 @@ class GraphicsCore {
 	initializeLoader(loader) {
 		// fetch all the sprites
 		loader
-			.add('bullet', '/public/images_original/bullet.png')
-			.add('spaceship', '/public/images_original/spaceship.png');
+			.add('bullet', '/public/images_original/bullet_pixel.png')
+			.add('spaceship', '/public/images_original/spaceship_pixel.png')
+			.add('invader', '/public/images_original/UFO_pixel.png');
 	}
 
 	addEntity(entityData) {
