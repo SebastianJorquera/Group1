@@ -14,6 +14,7 @@ public/build/GraphicsTest.js: public/build/Graphics.js javascript/Driver.js
 
 libraries = \
 			public/lib/pixi.js \
+			node_modules/@pixi/graphics-extras/dist/browser/graphics-extras.js \
 			public/lib/victor/build/victor.js
 
 public/build/Graphics.js: $(libraries) javascript/GraphicsCore.js javascript/Utils.js \

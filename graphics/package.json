@@ -11,6 +11,7 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
+    "@pixi/graphics-extras": "^6.0.2",
     "express": "^4.17.1"
   }
 }
