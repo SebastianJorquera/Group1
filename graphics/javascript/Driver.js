@@ -98,6 +98,10 @@ function setup() {
 	graphicsCore.addEntity({
 		type: 'Background',
 	});
+	graphicsCore.addEntity({
+		type: 'Blockade',
+		coords: [400, 100, 400 + 400, 100 + 50],
+	});
 	graphicsCore.addEntity(button);
 	requestAnimationFrame(gameLoop);
 }

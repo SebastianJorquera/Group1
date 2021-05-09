@@ -8,6 +8,7 @@ class GraphicsCore {
 		'Player' : Player,
 		'Bullet' : Bullet,
 		'EnemyBullet' : EnemyBullet,
+		'Blockade' : Blockade,
 		'Background' : Background,
 		'Button' : Button,
 		'FlamingButton' : FlamingButton,
