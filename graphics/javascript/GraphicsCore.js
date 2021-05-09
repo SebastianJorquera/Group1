@@ -73,13 +73,4 @@ class GraphicsCore {
 		}
 		this.entities = aliveEntities;
 	}
-
-	clearParticles() {
-	}
-
-	clearEntities() {
-	}
-
-	clearMenuEntities() {
-	}
 }
