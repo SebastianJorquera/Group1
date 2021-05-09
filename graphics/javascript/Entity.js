@@ -17,7 +17,11 @@ class Entity {
 	static applyDefaultProps(defaults, props) {
 		for (let attribute in defaults) {
 			if (!(attribute in props)) {
-				props[attribute] = defaults[attribute];
+				if (Array.isArray(defaults[attribute])) {
+					props[attribute] = [...defaults[attribute]];
+				} else {
+					props[attribute] = defaults[attribute];
+				}
 			}
 		}
 	}

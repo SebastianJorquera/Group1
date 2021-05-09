@@ -76,10 +76,20 @@ class TestEntity extends EnemyBullet {
 	}
 }
 
+let frames = 0;
 function gameLoop() {
+	if (frames % 20 == 0) {
+		button.text = 'Frame count: ' + String(frames);
+	}
+	frames++;
 	graphicsCore.graphicsLoop();
 	requestAnimationFrame(gameLoop);
 }
+
+let button = {
+	type: 'FlamingButton',
+	coords: [100, 100, 100 + 300, 100 + 100],
+};
 
 function setup() {
 	graphicsCore.addEntity({
@@ -88,9 +98,23 @@ function setup() {
 	graphicsCore.addEntity({
 		type: 'Background',
 	});
+	graphicsCore.addEntity(button);
 	requestAnimationFrame(gameLoop);
 }
+
+document.addEventListener('mousemove', (event) => {
+	let x = event.clientX;
+	let y = event.clientY;
+	let coords = button.coords;
+	if (coords[0] <= x && x <= coords[2]
+		&& coords[1] <= y && y <= coords[3]) {
+		button.hover = true;
+	} else {
+		button.hover = false;
+	}
+});
 
 const container = document.body;
 const keyboard = new Keyboard(container);
 const graphicsCore = new TestGraphicsCore(container, setup);
+

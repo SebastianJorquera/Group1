@@ -9,6 +9,8 @@ class GraphicsCore {
 		'Bullet' : Bullet,
 		'EnemyBullet' : EnemyBullet,
 		'Background' : Background,
+		'Button' : Button,
+		'FlamingButton' : FlamingButton,
 	};
 
 	sound = {

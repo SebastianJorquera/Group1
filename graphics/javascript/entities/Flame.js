@@ -6,6 +6,7 @@ class Flame extends Particle {
 	circleLifeCycle = 90;
 
 	fadingCircleTextures = {};
+	isActivated = true;
 
 	/* position : Victor
 	 * angle : int // uses degrees
@@ -28,10 +29,20 @@ class Flame extends Particle {
 	}
 
 	update() {
-		super.update();
-		for (let i = 0; i < this.spawnCount; i++) {
-			this.spawnSpark();
+		if (this.isActivated) {
+			super.update();
+			for (let i = 0; i < this.spawnCount; i++) {
+				this.spawnSpark();
+			}
 		}
+	}
+
+	turnOn() {
+		this.isActivated = true;
+	}
+
+	turnOff() {
+		this.isActivated = false;
 	}
 
 	spawnSpark() {
@@ -63,6 +74,6 @@ class Flame extends Particle {
 
 	cleanup() {
 		super.cleanup();
-		this.core.app.stage.remove(this.container);
+		this.core.app.stage.removeChild(this.container);
 	}
 }
