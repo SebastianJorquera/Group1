@@ -41,7 +41,7 @@ class TestGraphicsCore extends GraphicsCore {
 	}
 }
 
-class TestEntity extends EnemyBullet {
+class TestEntity extends Enemy {
 	draw() {
 		super.draw();
 		// gameloop code, don't put this type of code in draw

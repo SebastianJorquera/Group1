@@ -6,8 +6,9 @@ class PulseExplosion extends Particle{
     constructor(core, position, exploProps){
         super(core);
         this.position = position;
-        this.innerRadius = 0;
-        this.outerRadius = 1;
+        this.innerRadius = 1;
+        this.outerRadius = 2;
+		this.radiusDifference = 5;
         this.maxRadius = exploProps.maxRadius ? exploProps.maxRadius : 5;
         this.frameStart = exploProps.frameStart ? exploProps.frameStart : 0;
         this.frameEnd = this.frameStart + this.maxRadius;
@@ -17,7 +18,7 @@ class PulseExplosion extends Particle{
 
     }
     //creates a explosions beginning
-    setUp(){
+    setup(){
         let explosion = new PIXI.Graphics();
         this.explosion = explosion;
         this.explosion.renderable = false; //double check this works
@@ -28,41 +29,53 @@ class PulseExplosion extends Particle{
 
     //continues updating explosion after beginning. Called by loop repeatedly in graphicscore
     update(){
-        if(currentFrame < frameStart){
-            console.log("not yet appeared");
+		super.update();
+        if(this.currentFrame < this.frameStart){
         }
-        else if (currentFrame < frameEnd){
+        else if (this.currentFrame < this.frameEnd){
             this.explosion.renderable = true;
-            this.explosion.outerRadius++;
+            this.outerRadius++;
+			if (this.outerRadius > this.radiusDifference) {
+				this.innerRadius++;
+			}
         }
-        else if (currentFrame-frameEnd < 5){
-            this.explosion.innerRadius+this.explosion.outerRadius/6;
-            console.log("shrinking");
+        else if (this.currentFrame - this.frameEnd < 5){
+			this.innerRadius -= 10;
+			this.outerRadius -= 10;
+			if (this.innerRadius < 1) {
+				this.innerRadius = 1;
+			}
+			if (this.outerRadius < 2) {
+				this.outerRadius = 2;
+			}
         }
         else{
-            this.explosion.isAlive = false;
-            console.log("dead");
-
+            this.alive = false;
         }
-        currentFrame++;
+        this.currentFrame++;
     }
     draw(){
+		super.draw();
+		this.drawExplo();
         this.locationUpdate();
     }
     locationUpdate(){
-        this.explosion.x = position.x;
-        this.explosion.y = position.y;
+        this.explosion.x = this.position.x;
+        this.explosion.y = this.position.y;
     }
     //removes all children involved in circle
     cleanup(){
         super.cleanup();
-        this.container.removeChild(explosion);
+        this.container.removeChild(this.explosion);
+		if (!(this.container === this.core.app.stage)) {
+			this.core.app.stage.removeChild(this.container);
+		}
     }
 
     drawExplo(){
         this.explosion.clear();
 		this.explosion.beginFill(this.color, this.alpha);
-		this.explosion.drawTorus(0, 0, innerRadius, outerRadius);
+		this.explosion.drawTorus(0, 0, this.innerRadius, this.outerRadius);
 		this.explosion.endFill();
 		this.explosion.zIndex = -1;
     }

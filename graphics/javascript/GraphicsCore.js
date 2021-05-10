@@ -6,6 +6,7 @@ class GraphicsCore {
 	 * the class Player will be created for the entityData object. */
 	entityClassMap = {
 		'Player' : Player,
+		'Enemy' : Enemy,
 		'Bullet' : Bullet,
 		'EnemyBullet' : EnemyBullet,
 		'Blockade' : Blockade,
