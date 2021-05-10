@@ -7,6 +7,8 @@ class Background extends Entity {
 		spawnCount : 1,
 		starRadius : 5,
 		layers : 5,
+		shootingStarChance : 5, // percent
+		shootingStarSpeed : 5,
 	}
 
 	setDefaultProps(props) {
@@ -52,20 +54,28 @@ class Background extends Entity {
 	}
 
 	addStar(position, color, radius) {
+		let velocity = new Victor(0, 0);
+		if (Math.random() * 100 < this.props.shootingStarChance) {
+			velocity.x = Math.random() * 2 - 1;
+			velocity.y = Math.random() * 2 - 1;
+			velocity.normalize();
+			velocity.multiply(new Victor(this.props.shootingStarSpeed, this.props.shootingStarSpeed));
+		}
+
 		let alpha = 1 / this.props.layers;
 		let radiusDecrement = radius / (this.props.layers + 1);
 		let life = Math.floor(this.props.starLifeCycle * 2 * Utils.gaussianRand(3));
 		for (let i = 0; i < this.props.layers; i++) {
-			let circle = this.createCircle(position.clone(), color, alpha, radius, i, life);
+			let circle = this.createCircle(position, velocity, color, alpha, radius, i, life);
 			radius -= radiusDecrement;
 			this.addParticle(circle);
 		}
 	}
 
-	createCircle(position, color, alpha, radius, textureIndex, lifecycle) {
+	createCircle(position, velocity, color, alpha, radius, textureIndex, lifecycle) {
 		return new FadingCircleP(this.core,
-			position,
-			new Victor(0,0),
+			position.clone(),
+			velocity.clone(),
 			this.fadingCircleTextureList[textureIndex],
 			{
 				color: color,
