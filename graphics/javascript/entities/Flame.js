@@ -3,7 +3,7 @@ class Flame extends Particle {
 	farColor = 0xff7aa2;
 	fadeColor = 0xe01e37;
 	spawnCount = 100;
-	circleLifeCycle = 90;
+	circleLifeCycle = 60;
 
 	fadingCircleTextures = {};
 	isActivated = true;
@@ -45,9 +45,13 @@ class Flame extends Particle {
 		this.isActivated = false;
 	}
 
+	randOffset() {
+		return (Utils.gaussianRand() - 0.5) * this.degRange;
+	}
+
 	spawnSpark() {
 		let deg = this.angle.angleDeg();
-		let randDegOffset = (Utils.gaussianRand() - 0.5) * this.degRange;
+		let randDegOffset = this.randOffset();
 		let randDeg = deg + randDegOffset;
 		let velocity = new Victor(this.maxSpeed * Utils.gaussianRand(), 0);
 		velocity.rotateDeg(randDeg);
@@ -75,5 +79,16 @@ class Flame extends Particle {
 	cleanup() {
 		super.cleanup();
 		this.core.app.stage.removeChild(this.container);
+	}
+}
+
+class CircleFlame extends Flame {
+	constructor(core, position, angle, flameProps) {
+		super(core, position, angle, flameProps);
+		this.degRange = 360;
+	}
+
+	randOffset() {
+		return (Math.random() - 0.5) * this.degRange;
 	}
 }

@@ -85,12 +85,11 @@ class Button extends Entity {
 class FlamingButton extends Button {
 	setup() {
 		super.setup();
-		this.flame = new Flame(this.core,
+		this.flame = new CircleFlame(this.core,
 			new Victor(this.text.x, this.text.y),
 			-90,
 			{
 				maxSpeed : 6,
-				degRange : 180,
 			}
 		);
 		this.flame.turnOff();
