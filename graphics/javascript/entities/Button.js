@@ -10,6 +10,7 @@ class Button extends Entity {
 		borderColor : 0x48cae4,
 		borderWidth : 4,
 		textColor : 0x023e8a,
+		renderable : true,
 	};
 
 	setDefaultProps(props) {
@@ -49,6 +50,8 @@ class Button extends Entity {
 
 	draw() {
 		super.draw();
+        this.button.renderable = this.props.renderable;
+        this.text.renderable = this.props.renderable;
 		this.updateButton();
 		this.updateText();
 	}
