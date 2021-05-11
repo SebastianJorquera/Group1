@@ -1,6 +1,9 @@
 var screenswap;
 const graphicsCore = new GraphicsCore(document.body, theGame);
 
+graphicsCore.addEntity({
+	type : 'Background',
+});
 function theGame() {
 
 let canvas = { width: 1200, height : 675 };
@@ -228,6 +231,7 @@ function spawnbullet(xB,yB,sB) {
 		y : bullets[bulletcount].y1 + bullets[bulletcount].y2 / 2,
 	};
 	graphicsCore.addEntity(bullets[bulletcount].graphics);
+	graphicsCore.playSound('enemyBlaster');
 	bulletcount= bulletcount +1;
 }
 
@@ -549,6 +553,7 @@ lostgame = 1;
     if(testCollisionEntity(bullets[i],swarm[c]) && swarm[c].isAlive==true){
     
     swarm[c].isAlive = false;
+		graphicsCore.playSound('enemyExplosion');
 		invaderGraphics(swarm[c]);
   bullets[i].y1 = -149;
   score= score + swarm[c].points;
