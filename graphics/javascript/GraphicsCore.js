@@ -17,7 +17,10 @@ class GraphicsCore {
 
 	sound = {
 		'blaster' : new Audio('/public/audio/blaster.mp3'),
-		'explosion' : new Audio('/public/audio/explode.mp3'),
+		'enemyBlaster' : new Audio('/public/audio_final/mixkit-game-whip-shot-1512.mp3'),
+		'explosion' : new Audio('/public/audio_final/Lose_explode.mp3'),
+		'enemyExplosion' : new Audio('/public/audio_final/enemyexplosion.mp3'),
+		'gameOver' : new Audio('/public/audio_final/mixkit-falling-game-over-1942.mp3'),
 	};
 
 	entities = [];
