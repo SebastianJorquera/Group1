@@ -426,8 +426,16 @@ rightPressed = false; // represent right arrow key beung pressed
 leftPressed = false; // represent left arrow key beung pressed
 spacePressed = false; // represent space key beung pressed
 createblockade();
+for (let i = 0; i < bullets.length; i++) {
+	if (bullets[i] === undefined) {continue; }
+	bullets[i] = bullets[i].graphics.isAlive = false;
+}
 bullets.length =0;
 bulletcount =0;
+for (let i = 0; i < swarm.length; i++) {
+	if (swarm[i] === undefined) {continue; }
+	swarm[i] = swarm[i].graphics.isAlive = false;
+}
 swarm.length =0;
 allynum =0;
 makeInvaders(5, 11, 5+round);
