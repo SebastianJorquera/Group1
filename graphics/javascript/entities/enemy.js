@@ -26,3 +26,10 @@ class Enemy extends CommonEntity{
 
 
 }
+
+class AlliedInvader extends Enemy {
+	setup() {
+		super.setup();
+		this.sprite.tint = 0x00EEAA;
+	}
+}

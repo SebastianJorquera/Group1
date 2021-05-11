@@ -7,6 +7,7 @@ class GraphicsCore {
 	entityClassMap = {
 		'Player' : Player,
 		'Enemy' : Enemy,
+		'Ally' : AlliedInvader,
 		'Bullet' : Bullet,
 		'EnemyBullet' : EnemyBullet,
 		'Blockade' : Blockade,
