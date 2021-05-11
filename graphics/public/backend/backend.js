@@ -155,6 +155,9 @@ var gameon = 1;
 //adjust spaceing
 var blockade = [];
 function createblockade(){
+	for (let i = 0; i < blockade.length; i++) {
+		blockade[i].graphics.isAlive = false;
+	}
  for (var c=0; c<16; c++){
  blockade[c] = {
 x1:( Math.floor(c/4))*300 + (c%4)*42 +60, //change for better fitting latter
@@ -425,6 +428,9 @@ gone = 0; //aliens destroyed
 rightPressed = false; // represent right arrow key beung pressed
 leftPressed = false; // represent left arrow key beung pressed
 spacePressed = false; // represent space key beung pressed
+	for (let i = 0; i < blockade.length; i++) {
+		blockade[i].graphics.isAlive = false;
+	}
 createblockade();
 for (let i = 0; i < bullets.length; i++) {
 	if (bullets[i] === undefined) {continue; }
@@ -440,7 +446,10 @@ swarm.length =0;
 allynum =0;
 makeInvaders(5, 11, 5+round);
 gameon=1;
-graphicsCore.addEntity(tank.graphics);
+if (!tank.graphics.added) {
+	graphicsCore.addEntity(tank.graphics);
+	tank.graphics.added = true;
+}
 
 }
 
